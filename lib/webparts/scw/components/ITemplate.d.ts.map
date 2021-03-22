@@ -1,1 +1,0 @@
-{"version":3,"file":"ITemplate.d.ts","sourceRoot":"","sources":["../../../../src/webparts/scw/components/ITemplate.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,SAAS;IACtB,GAAG,EAAE,MAAM,CAAC;IACZ,KAAK,EAAG,MAAM,CAAC;IACf,OAAO,EAAE,MAAM,CAAC;IAChB,WAAW,EAAE,MAAM,CAAC;IACpB,aAAa,EAAE,MAAM,CAAC;IACtB,GAAG,EAAE,MAAM,CAAC;CACb"}
