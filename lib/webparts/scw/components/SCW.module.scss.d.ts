@@ -1,0 +1,32 @@
+declare const styles: {
+    SCW: string;
+    root: string;
+    container: string;
+    row: string;
+    column: string;
+    'ms-Grid': string;
+    title: string;
+    subTitle: string;
+    description: string;
+    button: string;
+    label: string;
+    yes: string;
+    wizardStep: string;
+    imagetest: string;
+    selected: string;
+    welcomeContainer: string;
+    GoButton: string;
+    templateDesc: string;
+    labelBulingue: string;
+    people: string;
+    congratScreen: string;
+    pagination: string;
+    imageFit: string;
+    checkSiteBtn: string;
+    titleStep: string;
+    SectiontextField: string;
+    greencheckSite: string;
+    redcheckSite: string;
+};
+export default styles;
+//# sourceMappingURL=SCW.module.scss.d.ts.map

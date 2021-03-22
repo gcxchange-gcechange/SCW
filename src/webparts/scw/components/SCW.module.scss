@@ -1,0 +1,221 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.SCW {
+  .root{
+    background-color:grey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .container {
+    max-width: 500px;
+    margin: 50px 50px;
+    background-color: gray;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .row {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    align-items: center;
+    padding: 20px;
+    margin:50px 50px;
+  }
+
+  .column {
+    @include ms-Grid-col;
+    @include ms-lg10;
+    @include ms-xl8;
+    @include ms-xlPush2;
+    @include ms-lgPush1;
+  }
+
+  .title {
+    @include ms-font-xl;
+    @include ms-fontColor-white;
+  }
+
+  .subTitle {
+    @include ms-font-l;
+    @include ms-fontColor-white;
+  }
+
+  .description {
+    @include ms-font-l;
+    @include ms-fontColor-white;
+  }
+
+
+
+  .button {
+    // Our button
+    text-decoration: none;
+    height: 100px;
+
+    // Primary Button
+    width: 0px;
+    background-color: $ms-color-themePrimary;
+    border-color: $ms-color-themePrimary;
+    color: $ms-color-white;
+    margin: 20px 20px;
+
+    // Basic Button
+    outline: transparent;
+    position: relative;
+    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: $ms-font-size-m;
+    font-weight: $ms-font-weight-regular;
+    border-width: 0;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 16px;
+  }
+  .label {
+    font-weight: $ms-font-weight-semibold;
+    font-size: $ms-font-size-m;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px;
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  .yes { color: green; }
+
+}
+
+.wizardStep {
+  background-color: #e6e6e6;
+  padding: 0 10px 10px 10px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.imagetest{
+  border:1px solid #e6e6e6;
+}
+.imagetest:hover {
+  border: 1px black solid;
+}
+
+.selected {
+  background-color: grey;
+}
+
+.welcomeContainer{
+  background-color: #e6e6e6;
+  padding: 3%;
+  color: #27437d;
+  text-align: center;
+}
+.GoButton{
+  background-color: #0a5bfc;
+  color:white;
+  border-radius: 15px;
+  border: 1px solid #0a5bfc;
+}
+.GoButton:hover{
+  background-color: #27437d!important;
+  border-color: #27437d!important;
+  color:white!important;
+}
+
+.GoButton:active{
+  background-color: white;
+  border-color: #27437d;
+  color:#0a5bfc;
+}
+
+.GoButton:focus{
+  background-color: white;
+  border-color: #0a5bfc;
+  color:#0a5bfc;
+}
+
+.templateDesc{
+  text-align:justify;
+}
+
+.labelBulingue{
+  text-align: left;
+  font-weight: 600;
+}
+
+#people {
+  text-align: left;
+  font-weight: 600;
+}
+
+.congratScreen{
+  background-color: #0A5BFC;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  img{
+    margin-top:5%;
+  }
+  a {
+    color: inherit;
+  }
+  button{
+    color:inherit;
+    font-size: x-large;
+    border: 3px solid white;
+    border-radius: 20px;
+    background-color: inherit;
+    padding: 0px 5%;
+  }
+  button:hover{
+    background-color: #27437d;
+  }
+}
+
+
+.pagination button:focus{
+  border: 3px black solid
+}
+
+input[type="button"]:disabled {
+  background: #740e0e;
+}
+
+.imageFit{
+  margin:auto;
+}
+
+.checkSiteBtn{
+  background-color: #0A5BFC;
+  color:white;
+  border-radius: 15px;
+}
+
+.checkSiteBtn:hover{
+  background-color: #27437d;
+  color:white;
+}
+
+.checkSiteBtn[type="button"]:disabled{
+  background-color:#F4F4F4;
+  color:#5E5E5E
+}
+
+.titleStep{
+  clear: both;
+}
+
+.SectiontextField{
+  width: 90%;
+  margin:auto;
+}
+
+.greencheckSite{
+  color:green;
+  font-weight: 500;
+  font-size: large;
+}
+
+.redcheckSite{
+  color:red;
+  font-weight: 500;
+  font-size: large;
+}

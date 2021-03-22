@@ -1,0 +1,83 @@
+declare interface ISCWWebPartStrings {
+  userLang: string;
+  PropertyPaneDescription: string;
+  BasicGroupName: string;
+  ListTemplateFieldLabel: string;
+  TitleCreate: string;
+  createSpace: string;
+  paragrapheHome: string;
+  startButton: string;
+  powered: string;
+  gcx: string;
+  menuTemplate: string;
+  menuSpace: string;
+  menuTell: string;
+  menuOwners: string;
+  menuFinal: string;
+  titleTemplate: string;
+  paragrapheTemplate: string;
+  titleSpace: string;
+  paragrapheSpace: string;
+  validationTxtSpace: string
+  english: string;
+  french: string;
+  validationSpaceInput: string;
+  btnChecksite: string;
+  greatChoice: string;
+  siteTaken: string;
+  titleTellUs: string;
+  paragrapheTellUs: string;
+  validationTxtTellUs: string;
+  businessReason: string;
+  phLetus: string;
+  phBusinessReason:string;
+  titleOwners: string;
+  paragrapheOwners: string;
+  validationTxtOwners: string;
+  owners: string;
+  titleReview: string;
+  templateTitle: string;
+  spaceName: string;
+  spaceDescEn: string;
+  spaceDescFr: string;
+  teamPurpose: string;
+  btnSubmit: string;
+  congrats: string;
+  congratPara1: string;
+  congratPara2: string;
+  congratHome: string;
+  congratPara3: string;
+  congratLink: string;
+  altTemplate: string;
+  templateButtonLabel: string;
+  iconLoading: string;
+  textLoading : string;
+  altWelcome: string;
+  altCongrat: string;
+  ownerInfo1: string;
+  ownerInfo2: string;
+  ownerInfo3: string;
+  ownerInfo4: string;
+  tooltipWelImg: string;
+  tooltipWelBtn: string;
+  tooltipspaceNameEn:string;
+  tooltipspaceNameFr:string;
+  tooltipchecksite:string;
+  tooltipdescEn:string;
+  tooltipdescFr:string;
+  tooltipBusReason:string;
+  tooltipOwners: string
+  tooltipBtnBack:string;
+  tooltipBtnNext: string;
+  tootltipBtnEnd:string;
+  tooltipBtnCancel: string;
+  NextBtn: string;
+  BackBtn: string;
+  CancelBtn:string;
+  ErrMustLetter: strings;
+}
+
+declare module 'SCWWebPartStrings' {
+  const strings: ISCWWebPartStrings;
+  export = strings;
+}

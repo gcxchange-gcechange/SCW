@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "SCW-Webpart",
+    "id": "45fe0213-fe82-4a2a-ac45-37b727b91087",
+    "version": "3.0.0.9",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": ""
+    },
+    "webApiPermissionRequests": [  
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Group.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Group.ReadWrite.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Directory.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Directory.ReadWrite.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Directory.AccessAsUser.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.ReadWrite.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Site.ReadWrite.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Site.Read.All"
+      },
+      {
+        "resource": "Windows Azure Active Directory",
+        "scope": "User.Read"
+      },
+      {
+        "resource": "SCWSiteCreationFuncApp",
+        "scope": "user_impersonation"
+      }
+    ] 
+  },
+  "paths": {
+    "zippedPackage": "solution/SCW.sppkg"
+  }
+}
