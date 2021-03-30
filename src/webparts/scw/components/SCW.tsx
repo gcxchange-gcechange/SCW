@@ -492,7 +492,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                       className={styles.imageFit}
                       title={strings.tooltipWelImg}
                     />
-                    <h1>{strings.createSpace}</h1>
+                    <h1 className={ styles.titleStep }>{strings.createSpace}</h1>
                     <p>{strings.paragrapheHome}</p>
                     {this.state.templateItems.length !=0 ?
                       <DefaultButton title={strings.startButton} className={styles.GoButton} text={strings.startButton} onClick={() => this._openWizard()} /> 

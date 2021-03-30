@@ -2,14 +2,15 @@
 
 .SCW {
   .root{
-    background-color:grey;
+    background-color: transparent;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .container {
     max-width: 500px;
     margin: 50px 50px;
-    background-color: gray;
+    background-color: transparent;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .row {
@@ -85,7 +86,7 @@
 }
 
 .wizardStep {
-  background-color: #e6e6e6;
+  background-color: transparent;
   padding: 0 10px 10px 10px;
   text-align: center;
   min-height: 300px;
@@ -103,7 +104,7 @@
 }
 
 .welcomeContainer{
-  background-color: #e6e6e6;
+  background-color: transparent;
   padding: 3%;
   color: #27437d;
   text-align: center;
@@ -201,6 +202,8 @@ input[type="button"]:disabled {
 
 .titleStep{
   clear: both;
+  font-weight: 600 !important;
+  color: #27437d;
 }
 
 .SectiontextField{

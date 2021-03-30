@@ -4,13 +4,13 @@
   .root {
     max-width: 500px;
     margin: 50px 50px;
-    background-color: gray;
+    background-color: transparent;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
   .row {
     @include ms-Grid-row;
     padding: 20px;
-    background-color: gray;
+    background-color: transparent;
     margin:none;
   }
 
