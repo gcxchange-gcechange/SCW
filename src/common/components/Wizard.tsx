@@ -273,7 +273,7 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
             linkContent: [],
             text:[],
           };
-        return <div className={styles.wizardComponent} style={{backgroundColor:"#e6e6e6"}}>
+        return <div className={styles.wizardComponent}>
             <div className={`${styles.canceled}`}>
                     {this.cancelButton}
                 </div>
@@ -288,7 +288,7 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
             {this.state.isValidatingStep && <div>{this.props.validatingMessage || DEFAULT_VALIDATING_MESSAGE}</div>}
             {this.state.errorMessage && <div className={styles.error}>{this.state.errorMessage}</div>}
 
-            <div className={styles.row} style={{backgroundColor:"#e6e6e6"}}>
+            <div className={styles.row}>
                 <div className={`${styles.righted}`}>
                     {this.nextButton}
                     {this.finishButton}

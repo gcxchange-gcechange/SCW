@@ -1,26 +1,26 @@
 /* tslint:disable */
 require("./Wizard.module.css");
 const styles = {
-  wizardComponent: 'wizardComponent_45213d41',
-  root: 'root_45213d41',
-  row: 'row_45213d41',
-  column: 'column_45213d41',
-  'ms-Grid': 'ms-Grid_45213d41',
-  halfColumn: 'halfColumn_45213d41',
-  fullWidthColumn: 'fullWidthColumn_45213d41',
-  title: 'title_45213d41',
-  subTitle: 'subTitle_45213d41',
-  description: 'description_45213d41',
-  lefted: 'lefted_45213d41',
-  righted: 'righted_45213d41',
-  canceled: 'canceled_45213d41',
-  error: 'error_45213d41',
-  button: 'button_45213d41',
-  label: 'label_45213d41',
-  container: 'container_45213d41',
-  progressbar: 'progressbar_45213d41',
-  active: 'active_45213d41',
-  nextBtn: 'nextBtn_45213d41'
+  wizardComponent: 'wizardComponent_2f6e3839',
+  root: 'root_2f6e3839',
+  row: 'row_2f6e3839',
+  column: 'column_2f6e3839',
+  'ms-Grid': 'ms-Grid_2f6e3839',
+  halfColumn: 'halfColumn_2f6e3839',
+  fullWidthColumn: 'fullWidthColumn_2f6e3839',
+  title: 'title_2f6e3839',
+  subTitle: 'subTitle_2f6e3839',
+  description: 'description_2f6e3839',
+  lefted: 'lefted_2f6e3839',
+  righted: 'righted_2f6e3839',
+  canceled: 'canceled_2f6e3839',
+  error: 'error_2f6e3839',
+  button: 'button_2f6e3839',
+  label: 'label_2f6e3839',
+  container: 'container_2f6e3839',
+  progressbar: 'progressbar_2f6e3839',
+  active: 'active_2f6e3839',
+  nextBtn: 'nextBtn_2f6e3839'
 };
 
 export default styles;
