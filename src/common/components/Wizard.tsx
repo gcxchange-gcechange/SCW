@@ -260,8 +260,11 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
                 paddingTop:"5%"
               }
             ],
-            link:[],
+            link:[{
+                display: 'none',
+            }],
             linkIsSelected: [{
+                display: 'none',
                 selectors: {
                     ':before': {
                         borderBottom: 'none',
@@ -270,7 +273,9 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
             }],
             icon: [],
             count:[],
-            linkContent: [],
+            linkContent: [{
+                'display': 'none',
+            }],
             text:[],
           };
         return <div className={styles.wizardComponent}>

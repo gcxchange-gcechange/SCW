@@ -96,11 +96,11 @@
   border:1px solid #e6e6e6;
 }
 .imagetest:hover {
-  border: 1px black solid;
+  border: 1px #0a5bfc solid;
 }
 
 .selected {
-  background-color: grey;
+  background-color: #e6e6e6;
 }
 
 .welcomeContainer{
@@ -145,6 +145,12 @@
 #people {
   text-align: left;
   font-weight: 600;
+}
+
+.poweredByText {
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-top:12px;
 }
 
 .congratScreen{
@@ -204,6 +210,7 @@ input[type="button"]:disabled {
   clear: both;
   font-weight: 600 !important;
   color: #27437d;
+  font-size: 2em !important;
 }
 
 .SectiontextField{
@@ -221,4 +228,13 @@ input[type="button"]:disabled {
   color:red;
   font-weight: 500;
   font-size: large;
+}
+
+.templateHolder {
+  display: flex;
+  width: 50%;
+}
+
+.reviewHolder {
+  display: flex;
 }

@@ -20,8 +20,8 @@ define([], function() {
     "titleSpace": "Give your community a bilingual name",
     "paragrapheSpace": "Why a bilingual name? A bilingual name complies with the Official Languages Act and makes it easier for others to find your SharePoint community in the gcxchange Catalogue.",
     "validationTxtSpace": "Each name must contain letters and numbers only. Each one must be a minimum of 5 characters and a maximum of 125 characters long.",
-    "english": "English",
-    "french": "French",
+    "english": "English Community Name",
+    "french": "French Community Name",
     "validationSpaceInput": "Must contain letters and numbers only",
     "greatChoice": "Great choice!",
     "siteTaken": "Community name is taken. Try again.",
@@ -75,6 +75,6 @@ define([], function() {
     "NextBtn": "Next",
     "BackBtn": "Previous",
     "CancelBtn": "Cancel",
-    "ErrMustLetter": "Must contain letters and numbers only",
+    "ErrMustLetter": "Must be a minimum of 5 characters and contain letters and numbers only",
   }
 });
