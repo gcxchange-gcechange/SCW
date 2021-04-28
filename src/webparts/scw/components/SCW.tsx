@@ -95,6 +95,9 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
       checkSite: true,
       loading: false
     };
+    this.onchangedTitle = this.onchangedTitle.bind(this);
+    this.onchangedFrName = this.onchangedFrName.bind(this);
+    this._getOwners = this._getOwners.bind(this);
   }
 
   private imagesTemplate(key, title){
@@ -108,6 +111,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
     this.setState({
       selected: selTemplate,
     });
+    console.log(this.state.selected);
   }
 
   private _closeWizard(completed: boolean = false) {
@@ -190,24 +194,33 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
         <p>{strings.paragrapheTemplate}</p>
           <div className="ms-Grid" dir="ltr">
             {this.state.templateItems.map(item => (
-              <button 
-                autoFocus={(item.key == 0 ? true : false)}
-                className={`${styles.imagetest} ${(this.state.selected[0] !== undefined ? this.state.selected[0]["key"] == item.key ? styles.selected : "" : "")} ms-Grid-col ms-sm12 ms-md6 ms-lg6 `}
-                onClick={() => this.imagesTemplate(item.key, item.title)}
-                aria-label={`${strings.templateButtonLabel}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}>
+              <span key={item.key} className={styles.templateHolder}>
+                <input
+                 autoFocus={(item.key == 0 ? true : false)}
+                  type="radio"
+                  name="template"
+                  id={`template-${item.key}`}
+                  onClick={() => this.imagesTemplate(item.key, item.title)}
+                  aria-label={`${strings.templateButtonLabel}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}
+                />
+                <label
+                  htmlFor={`template-${item.key}`}
+                  className={`${styles.imagetest} ${(this.state.selected[0] !== undefined ? this.state.selected[0]["key"] == item.key ? styles.selected : "" : "")} ms-Grid-col`}
+                >
                   <Image
-                    title={`${strings.altTemplate}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}
-                    src= {item.url}
-                    alt={`${strings.altTemplate}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}
-                    width={150}
-                    height={250}
-                    className="ms-Grid-col ms-sm12 ms-md6 ms-lg6"
-                  />
-                <div className={"ms-Grid-col ms-sm5 ms-md5 ms-lg5"}>
-                  <h4>{(strings.userLang == "EN" ? item.title : item.titleFR)}</h4>
-                  <p title={(strings.userLang == "EN" ? item.description : item.descriptionFR)} className={styles.templateDesc}>{(strings.userLang == "EN" ? item.description : item.descriptionFR)}</p>
-                </div>
-              </button>
+                      title={`${strings.altTemplate}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}
+                      src= {item.url}
+                      alt={`${strings.altTemplate}${(strings.userLang == "EN" ? item.title : item.titleFR)}`}
+                      width={150}
+                      height={250}
+                      className="ms-Grid-col ms-sm12 ms-md6 ms-lg6"
+                    />
+                  <div className={"ms-Grid-col ms-sm5 ms-md5 ms-lg5"}>
+                    <h4>{(strings.userLang == "EN" ? item.title : item.titleFR)}</h4>
+                    <p title={(strings.userLang == "EN" ? item.description : item.descriptionFR)} className={styles.templateDesc}>{(strings.userLang == "EN" ? item.description : item.descriptionFR)}</p>
+                  </div>
+                </label>
+              </span>
             ))}
           </div> 
         {/* <Stack horizontal verticalAlign="center" horizontalAlign="center">
@@ -248,18 +261,18 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           <em>{strings.validationTxtSpace}</em>  
           <section className={styles.SectiontextField}>
             <div className="form-group">
-              <Label htmlFor="englishLabelTitle" className={styles.labelBulingue} required>{strings.english}</Label>  
-              <TextField title={strings.tooltipspaceNameEn} autoFocus  id="englishLabelTitle" onChanged={this.onchangedTitle} />
-              <span style={{color: "#C70000"}}>{this.state.error}</span>
+              <Label htmlFor="englishLabelTitle" className={styles.labelBulingue} required>{strings.english}</Label>
+              <span id="englishLabelDesc" style={{color: "#777777", textAlign: 'left', display: 'block'}}>{strings.ErrMustLetter}</span>
+              <TextField title={strings.tooltipspaceNameEn} autoFocus  id="englishLabelTitle" onChanged={this.onchangedTitle} aria-labelledby="englishLabelDesc" errorMessage={(!this.state.isSiteEnNameRight) && this.state.error} />
               <br></br>
             </div>  
             <div className="form-group">
               <Label htmlFor="frenchLabelTitle" required className={styles.labelBulingue}>{strings.french}</Label>
-              <TextField title={strings.tooltipspaceNameFr} id="frenchLabelTitle"  onChanged={this.onchangedFrName} /> 
-              <span style={{color: "#C70000"}}>{this.state.error}</span>
+              <span id="frenchLabelDesc" style={{color: "#777777", textAlign: 'left', display: 'block'}}>{strings.ErrMustLetter}</span>
+              <TextField title={strings.tooltipspaceNameFr} id="frenchLabelTitle"  onChanged={this.onchangedFrName} aria-labelledby="frenchLabelDesc" errorMessage={(!this.state.isSiteFrNameRight) && this.state.error} /> 
               <div className={`${styles.yes} form-group`}>
                 <p> 
-                  <label className={(this.state.checkSite == false ? styles.greencheckSite : styles.redcheckSite)}> {this.state.isAvailiability}</label>  
+                  <label aria-live="polite" className={(this.state.checkSite == false ? styles.greencheckSite : styles.redcheckSite)}> {this.state.isAvailiability}</label>  
                 </p>
               </div>
             </div>
@@ -323,6 +336,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               disabled={true}/>
               
             <PeoplePicker
+            placeholder={strings.owners}
             showtooltip={true}
               tooltipMessage={strings.tooltipOwners}
               context={this.props.context}
@@ -346,27 +360,56 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           {(this.state.loading ? 
             <div>
               <Label>{strings.textLoading}</Label>
-              <Spinner label={strings.iconLoading} ariaLive="assertive" labelPosition="left" />
+              <Spinner label={strings.iconLoading} ariaLabel={strings.iconLoading} ariaLive="assertive" labelPosition="left" />
             </div> 
             :
             <div>
-              <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg6">
+              <div className="ms-Grid-row ms-sm12 ms-md12 ms-lg12">
+                <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
                 <Label htmlFor="templateLabel" className={styles.labelBulingue} required>{strings.templateTitle}</Label>
                 <TextField
+                  autoFocus
                   title={strings.templateTitle}
                   id="templateLabel"
                   readOnly
                   value={(this.state.selected[0] !== undefined ? this.state.selected[0]["title"]: "")}
                   placeholder="template"></TextField>
-        
-                <Label htmlFor="spaceEnLabel" className={styles.labelBulingue} required>{strings.spaceDescEn}</Label>
+                  </div>
+                  <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
+                <Label htmlFor="spaceNameLabel" className={styles.labelBulingue} required>{strings.spaceName}</Label>
+                <TextField
+                  title={strings.spaceName}
+                  id="spaceNameLabel"
+                  readOnly
+                  value={`'${this.state.title}-${this.state.frName}'`}
+                  placeholder="Space Name"></TextField>
+                </div>
+                
+              </div>
+              <div className="ms-Grid-row ms-sm12 ms-md12 ms-lg12">
+              <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
+              <Label htmlFor="spaceEnLabel" className={styles.labelBulingue} required>{strings.spaceDescEn}</Label>
                 <TextField
                   title={strings.spaceDescEn}
                   id="spaceEnLabel"
                   readOnly
                   defaultValue={this.state.tellusEn}
                   placeholder="Descripton en"></TextField>
-                <Label htmlFor="ownersLabel" className={styles.labelBulingue} required>{strings.owners}</Label>
+                </div>
+                <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
+                <Label htmlFor="spaceFrLabel" className={styles.labelBulingue} required>{strings.spaceDescFr}</Label>
+                <TextField
+                  title={spaceDescFr}
+                  id="spaceFrLabel"
+                  readOnly
+                  defaultValue={this.state.tellusFr}
+                  placeholder="Description fr"></TextField>
+                  </div>
+              </div>
+
+              <div className="ms-Grid-row ms-sm12 ms-md12 ms-lg12">
+              <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
+              <Label htmlFor="ownersLabel" className={styles.labelBulingue} required>{strings.owners}</Label>
                 <TextField
                   title={strings.owners}
                   id="ownersLabel"
@@ -375,24 +418,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   readOnly
                   value={listOwners}
                   placeholder="Owners"></TextField>
-              </div>
-
-              <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg6">
-                <Label htmlFor="spaceNameLabel" className={styles.labelBulingue} required>{strings.spaceName}</Label>
-                <TextField
-                  title={strings.spaceName}
-                  id="spaceNameLabel"
-                  readOnly
-                  value={`'${this.state.title}-${this.state.frName}'`}
-                  placeholder="Space Name"></TextField>
-                <Label htmlFor="spaceFrLabel" className={styles.labelBulingue} required>{strings.spaceDescFr}</Label>
-                <TextField
-                  title={spaceDescFr}
-                  id="spaceFrLabel"
-                  readOnly
-                  defaultValue={this.state.tellusFr}
-                  placeholder="Description fr"></TextField>
-
+                </div>
+                <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
                 <Label htmlFor="teamPurposeLabel" className={styles.labelBulingue} required>{strings.teamPurpose}</Label>
                 <TextField
                 title={strings.teamPurpose}
@@ -402,6 +429,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                 readOnly
                 value={this.state.BusinessReason}
                 placeholder="Business Reason"></TextField>
+                </div>
               </div>
             </div>
           )}
@@ -480,7 +508,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                     />
                     <h1>{strings.congrats}</h1>
                     <p>{strings.congratPara1}</p>
-                    <p>{strings.congratPara2}</p>
+                    <p aria-live="polite">{strings.congratPara2}</p>
                     <button autoFocus onClick={() => this.ResetScreen()}>{strings.congratHome}</button>
                     <p>{strings.congratPara3} <a href="https://tbssctdev.sharepoint.com/"> {strings.congratLink}</a></p>
                   </div>
@@ -498,11 +526,11 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                       <DefaultButton title={strings.startButton} className={styles.GoButton} text={strings.startButton} onClick={() => this._openWizard()} /> 
                      :  
                       <div>
-                        <Spinner label={strings.iconLoading} ariaLive="assertive" />
+                        <Spinner label={strings.iconLoading} ariaLabel={strings.iconLoading} ariaLive="assertive" />
                       </div> 
                     }
-                    <h6>{strings.powered}
-                    <br></br>{strings.gcx}</h6>
+                    <div className={ styles.poweredByText }>{strings.powered}
+                    <br></br>{strings.gcx}</div>
                   </div>
             }
           </div>
@@ -580,32 +608,35 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
 
   private onchangedTitle(title: string): void {
     // check length, only include letter、number and -   title.length < 5 || title.length > 10 ||
+    console.log(title);
     if (title.match("^([a-zA-Z0-9 ]*)+$") == null || title.length < 5 || title.length > 125) {
-
-      this.setState({ isSiteEnNameRight: true });
+      console.log('Not match');
+      this.setState({
+        isSiteEnNameRight: false,
+        error: strings.ErrMustLetter, 
+      });
     } else {
+      console.log("matches");
       this.setState({ error: "" });
-      this.setState({ isSiteEnNameRight: false });
+      this.setState({ isSiteEnNameRight: true });
     }
     this.setState({
       title: title,
       isAvailiability: "",
-      error: strings.ErrMustLetter
     });
   }
 
   private onchangedFrName(frName: any): void {
     if (frName.match("^([A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ ]*)+$") == null || frName.length < 5 || frName.length > 125) {
       this.setState({ error: strings.ErrMustLetter });
-      this.setState({ isSiteFrNameRight: true });
+      this.setState({ isSiteFrNameRight: false });
     } else {
       this.setState({ error: "" });
-      this.setState({ isSiteFrNameRight: false });
+      this.setState({ isSiteFrNameRight: true });
     }
     this.setState({
       frName: frName,
       isAvailiability: "",
-      error: strings.ErrMustLetter
     });
 
   }

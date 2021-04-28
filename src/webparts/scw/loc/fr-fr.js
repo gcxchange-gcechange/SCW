@@ -75,7 +75,7 @@ define([], function() {
     "NextBtn": "Suivant",
     "BackBtn": "Revenez en arrière",
     "CancelBtn": "Annulez",
-    "ErrMustLetter": "Doit contenir uniquement des lettres et des chiffres"
+    "ErrMustLetter": "Doit contenir uniquement des lettres et des chiffres. Chaque nom doit comporter pas moins de 5 caractères et pas plus de 125 caractères"
 
   }
 });

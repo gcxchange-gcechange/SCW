@@ -1,26 +1,26 @@
 /* tslint:disable */
 require("./Wizard.module.css");
 const styles = {
-  wizardComponent: 'wizardComponent_2f6e3839',
-  root: 'root_2f6e3839',
-  row: 'row_2f6e3839',
-  column: 'column_2f6e3839',
-  'ms-Grid': 'ms-Grid_2f6e3839',
-  halfColumn: 'halfColumn_2f6e3839',
-  fullWidthColumn: 'fullWidthColumn_2f6e3839',
-  title: 'title_2f6e3839',
-  subTitle: 'subTitle_2f6e3839',
-  description: 'description_2f6e3839',
-  lefted: 'lefted_2f6e3839',
-  righted: 'righted_2f6e3839',
-  canceled: 'canceled_2f6e3839',
-  error: 'error_2f6e3839',
-  button: 'button_2f6e3839',
-  label: 'label_2f6e3839',
-  container: 'container_2f6e3839',
-  progressbar: 'progressbar_2f6e3839',
-  active: 'active_2f6e3839',
-  nextBtn: 'nextBtn_2f6e3839'
+  wizardComponent: 'wizardComponent_6c7a1128',
+  root: 'root_6c7a1128',
+  row: 'row_6c7a1128',
+  column: 'column_6c7a1128',
+  'ms-Grid': 'ms-Grid_6c7a1128',
+  halfColumn: 'halfColumn_6c7a1128',
+  fullWidthColumn: 'fullWidthColumn_6c7a1128',
+  title: 'title_6c7a1128',
+  subTitle: 'subTitle_6c7a1128',
+  description: 'description_6c7a1128',
+  lefted: 'lefted_6c7a1128',
+  righted: 'righted_6c7a1128',
+  canceled: 'canceled_6c7a1128',
+  error: 'error_6c7a1128',
+  button: 'button_6c7a1128',
+  label: 'label_6c7a1128',
+  container: 'container_6c7a1128',
+  progressbar: 'progressbar_6c7a1128',
+  active: 'active_6c7a1128',
+  nextBtn: 'nextBtn_6c7a1128'
 };
 
 export default styles;
