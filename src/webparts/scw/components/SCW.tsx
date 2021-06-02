@@ -662,27 +662,28 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               console.error(err);
               return;
             }
-
             // Prepare the output array
             var sites: Array<ISiteItem> = new Array<ISiteItem>();
             // Map the JSON response to the output array
-            res.value.map((item: any) => {
-              var split  = item.displayName.split(" - ");
-              var enValid = true;
-              var frValid = true;
-              if (split[0].toLowerCase() === this.state.title.toLowerCase()) {
-                enValid = false;
-              }
-              if (split[1].toLowerCase() === this.state.frName.toLowerCase()) {
-                frValid = false
-              }
-              sites.push({
-                displayName: item.displayName,
-                id: item.id,
-                enIsValid: enValid,
-                frIsValid: frValid,
-              });
-            });
+            if (res) {
+              res.value.map((item: any) => {
+                var split  = item.displayName.split(" - ");
+                var enValid = true;
+                var frValid = true;
+                if (split[0].toLowerCase() === this.state.title.toLowerCase()) {
+                  enValid = false;
+                }
+                if (split[1].toLowerCase() === this.state.frName.toLowerCase()) {
+                  frValid = false
+                }
+                sites.push({
+                  displayName: item.displayName,
+                  id: item.id,
+                  enIsValid: enValid,
+                  frIsValid: frValid,
+                });
+              });  
+            }
             var testing = [];
             if (sites.length != 0) {
               sites.map((s: any) => {
