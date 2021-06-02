@@ -23,12 +23,14 @@ export interface IWizardProps<TStep extends number> {
     onValidateStep?: (currentStep: TStep) => IWizardStepValidationResult | Promise<IWizardStepValidationResult>;
     onCompleted?: () => void;
     onCancel?: () => void;
+    onTitleCheck?: () => void;
     nextButtonLabel?: string;
     previousButtonLabel?: string;
     cancelButtonLabel?: string;
     finishButtonLabel?: string;
     validatingMessage?: string;
     mainCaption?: string;
+    checkSite?: boolean;
     disableStep1?: boolean;
     disableStep2?: boolean;
     disableStep4?: boolean;
@@ -193,7 +195,29 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
         let completedWizardSteps = (this.state.completedSteps | this.state.currentStep) as TStep;
         const nextStep = ((this.state.currentStep as number) << 1) as TStep;
         console.log("Current step: ", this.state.currentStep, " next step: ", nextStep, "completeSteps: ", this.state.completedSteps);
-        this._goToStep(nextStep, completedWizardSteps);
+        // I may be able to hook in a search here
+        if (this.state.currentStep === 2) {
+            this.props.onTitleCheck();
+            //console.log(this.props.checkSite);
+            this._goToStep(nextStep, completedWizardSteps);
+            /*
+            if (!this.props.checkSite) {
+                // The site name is available
+                this.setState({
+                    errorMessage: null,
+                });
+                this._goToStep(nextStep, completedWizardSteps);
+            } else {
+                // The site name is not available 
+                this.setState({
+                    errorMessage: "NAME TAKEN PLS REPLACE THIS WITH STRING",
+                    isValidatingStep: false
+                });
+            }
+            */
+        } else {
+            this._goToStep(nextStep, completedWizardSteps);
+        }
     }
 
     private _goToPreviousStep = () => {
@@ -238,7 +262,7 @@ export abstract class BaseWizard<TStep extends number> extends React.Component<I
     private get nextButton(): JSX.Element {
         var isDisable = "disableStep"+this.state.currentStep;
         if (this.hasNextStep) {
-            return <ActionButton title={strings.tooltipBtnNext} disabled={this.props[isDisable]} className={styles.nextBtn} styles={{flexContainer: { flexDirection: 'row-reverse' }, icon: {color: 'white', fontSize: 16}, iconHovered: {color:"white"}}} iconProps={{ iconName: "ChevronRight" }} text={this.props.nextButtonLabel || DEFAULT_NEXT_BUTTON_LABEL} onClick={this._goToNextStep} />;
+            return <ActionButton id="nextBtn" title={strings.tooltipBtnNext} disabled={this.props[isDisable]} className={styles.nextBtn} styles={{flexContainer: { flexDirection: 'row-reverse' }, icon: {color: 'white', fontSize: 16}, iconHovered: {color:"white"}}} iconProps={{ iconName: "ChevronRight" }} text={this.props.nextButtonLabel || DEFAULT_NEXT_BUTTON_LABEL} onClick={this._goToNextStep} />;
         }
         return null;
     }

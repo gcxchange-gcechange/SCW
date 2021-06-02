@@ -143,6 +143,12 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           isValidStep: isValid,
           errorMessage: !isValid ? "Select a template" : null
         };
+
+      case MyWizardSteps.SecondStep:
+        isValid = (!this.state.checkSite) ? true : false; 
+        return {
+          isValidStep: isValid
+        }
       case MyWizardSteps.ThirdStep:
 
         return new Promise((resolve) => {
@@ -181,9 +187,11 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
       onCancel={() => this._closeWizard(false)}
       onCompleted={() => this.callAzureFunction()}
       onValidateStep={(step) => this._onValidateStep(step)}
+      onTitleCheck={() => this._searchSite()}
+      checkSite={this.state.checkSite}
       validatingMessage={this.state.wizardValidatingMessage}
       disableStep1={(this.state.selected[0] !== undefined ? false : true)}
-      disableStep2={this.state.checkSite}
+      disableStep2={(this.state.title.length >= 5 && this.state.title.length <= 125 && this.state.frName.length >= 5 && this.state.frName.length <= 125 ? false : true)}
       disableStep4={(this.state.tellusEn.length >= 5 && this.state.tellusEn.length < 500 && this.state.tellusFr.length >= 5 && this.state.tellusFr.length < 500 && this.state.BusinessReason.length >= 5 && this.state.BusinessReason.length < 500 ? false : true)}
       disableStep8={(this.state.ownersNumber >= 2 ? false : true)}
       finishButtonLabel= {strings.btnSubmit}
@@ -276,8 +284,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                 </p>
               </div>
             </div>
-            <br></br>
-            <DefaultButton title={strings.tooltipchecksite} className={styles.checkSiteBtn} disabled={(this.state.title.length >= 5 && this.state.title.length <= 125 && this.state.frName.length >= 5 && this.state.frName.length <= 125 ? false : true)} onClick={this._searchSite}>{strings.btnChecksite}</DefaultButton>
           </section>
         </div>
       </WizardStep>
@@ -381,7 +387,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   title={strings.spaceName}
                   id="spaceNameLabel"
                   readOnly
-                  value={`'${this.state.title}-${this.state.frName}'`}
+                  value={`'${this.state.title} - ${this.state.frName}'`}
                   placeholder="Space Name"></TextField>
                 </div>
                 
@@ -608,15 +614,12 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
 
   private onchangedTitle(title: string): void {
     // check length, only include letter、number and -   title.length < 5 || title.length > 10 ||
-    console.log(title);
     if (title.match("^([a-zA-Z0-9 ]*)+$") == null || title.length < 5 || title.length > 125) {
-      console.log('Not match');
       this.setState({
         isSiteEnNameRight: false,
         error: strings.ErrMustLetter, 
       });
     } else {
-      console.log("matches");
       this.setState({ error: "" });
       this.setState({ isSiteEnNameRight: true });
     }
@@ -644,13 +647,14 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   private _searchSite = (): void => {
 
     // Log the current operation
+    // Grab the first few characters of the title to perform a search or similar titles
+    var searchItem = this.state.title.slice(0,5);
     this.props.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient) => {
-        // From https://github.com/microsoftgraph/msgraph-sdk-javascript sample
         client
           .api("groups")
-          .filter(`displayName eq '${this.state.title}-${this.state.frName}'`)
+          .filter(`startswith(displayName, '${searchItem}')`)
           .select("displayName,id,name")
           .get((err, res) => {
 
@@ -658,19 +662,61 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               console.error(err);
               return;
             }
-
             // Prepare the output array
             var sites: Array<ISiteItem> = new Array<ISiteItem>();
-
             // Map the JSON response to the output array
-            res.value.map((item: any) => {
-              sites.push({
-                displayName: item.displayName,
-                id: item.id,
-
-              });
-            });
+            if (res) {
+              res.value.map((item: any) => {
+                var split  = item.displayName.split(" - ");
+                var enValid = true;
+                var frValid = true;
+                if (split[0].toLowerCase() === this.state.title.toLowerCase()) {
+                  enValid = false;
+                }
+                if (split[1].toLowerCase() === this.state.frName.toLowerCase()) {
+                  frValid = false
+                }
+                sites.push({
+                  displayName: item.displayName,
+                  id: item.id,
+                  enIsValid: enValid,
+                  frIsValid: frValid,
+                });
+              });  
+            }
+            var testing = [];
             if (sites.length != 0) {
+              sites.map((s: any) => {
+                if (!s.enIsValid) {
+                  this.setState({
+                    error: strings.siteTaken,
+                    isSiteEnNameRight: false,
+                  })
+                  testing.push('False');
+                }
+                if(!s.frIsValid) {
+                  this.setState({
+                    error: strings.siteTaken,
+                    isSiteFrNameRight: false,
+                  })
+                  testing.push('False');
+                }
+              })
+             if (testing.length != 0) {
+              console.log('stay');
+             } else {
+               console.log('go');
+               this.setState(
+                {
+                  sites: sites,
+                  isAvailiability: strings.greatChoice,
+                  checkSite: false
+                }
+              );
+              if (document.getElementById('nextBtn')) {
+                document.getElementById('nextBtn').click();
+              }
+             }
               this.setState(
                 {
                   sites: sites,
@@ -678,6 +724,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   checkSite: true
                 }
               );
+              
             } else {
               this.setState(
                 {
@@ -686,6 +733,9 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   checkSite: false
                 }
               );
+              if (document.getElementById('nextBtn')) {
+                document.getElementById('nextBtn').click();
+              }
             }
           });
       });
@@ -716,7 +766,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
         {
           "name": 
           {
-            "title": "${this.state.title}-${this.state.frName}",
+            "title": "${this.state.title} - ${this.state.frName}",
             "spacenamefr": "${this.state.frName}",
             "owner1": "${owner1}",
             "owner2": "${owner2}",
