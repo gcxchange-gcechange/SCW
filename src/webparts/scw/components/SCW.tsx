@@ -670,8 +670,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                 var split  = item.displayName.split("-");
                 var enSplit = split[0].trim().toLowerCase();
                 var frSplit = split[1].trim().toLowerCase();
-                console.log(enSplit);
-                console.log(frSplit);
                 var enValid = true;
                 var frValid = true;
                 if (enSplit === this.state.title.toLowerCase()) {
