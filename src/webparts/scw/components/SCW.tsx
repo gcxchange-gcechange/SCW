@@ -667,13 +667,17 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
             // Map the JSON response to the output array
             if (res) {
               res.value.map((item: any) => {
-                var split  = item.displayName.split(" - ");
+                var split  = item.displayName.split("-");
+                var enSplit = split[0].trim().toLowerCase();
+                var frSplit = split[1].trim().toLowerCase();
+                console.log(enSplit);
+                console.log(frSplit);
                 var enValid = true;
                 var frValid = true;
-                if (split[0].toLowerCase() === this.state.title.toLowerCase()) {
+                if (enSplit === this.state.title.toLowerCase()) {
                   enValid = false;
                 }
-                if (split[1].toLowerCase() === this.state.frName.toLowerCase()) {
+                if (frSplit === this.state.frName.toLowerCase()) {
                   frValid = false
                 }
                 sites.push({
