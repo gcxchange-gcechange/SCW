@@ -847,6 +847,24 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           console.log('send reject message to queue successful.');
           console.log(`requester Email`, this.props.context.pageContext.user.email);
       });
-  });  
+  });
+
+            const postHD: IHttpClientOptions = {
+            headers: requestHeaders,
+            body: `
+      {
+          "name": "${this.state.title}-${this.state.frName}",
+          "status": "Notif_HD",
+      }`
+        };
+
+        this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
+            client.post(this.emailQueueUrl, AadHttpClient.configurations.v1, postHD).then((response: HttpClientResponse) => {
+                console.log(`Status code:`, response.status);
+                console.log('respond is ', response.ok);
+                console.log('send notif_HD message to queue successful.');
+                console.log(`requester Email`, this.props.context.pageContext.user.email);
+            });
+        });
   }
 }  
