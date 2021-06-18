@@ -550,7 +550,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   }
 
   private async loadTemplate(){
-
+    var allTemplateItems = [];
     await this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
       client.get(this.functionTemplateImg, AadHttpClient.configurations.v1).then((response: HttpClientResponse) => {
         console.log(`Status code: ${response.status}`);
