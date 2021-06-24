@@ -76,5 +76,6 @@ define([], function() {
     "BackBtn": "Previous",
     "CancelBtn": "Cancel",
     "ErrMustLetter": "Must be a minimum of 5 characters and contain letters and numbers only",
+    "DescriptionHelperText": "Must be a minimum of 5 characters and a maximum of 500 characters long",
   }
 });
