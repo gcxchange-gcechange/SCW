@@ -614,7 +614,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
 
   private onchangedTitle(title: string): void {
     // check length, only include letter、number and -   title.length < 5 || title.length > 10 ||
-    if (title.match("^([a-zA-Z0-9 ]*)+$") == null || title.length < 5 || title.length > 125) {
+    if (title.match("^([a-zA-Z0-9'()&,/#’ ]*)+$") == null || title.length < 5 || title.length > 125) {
       this.setState({
         isSiteEnNameRight: false,
         error: strings.ErrMustLetter, 
@@ -630,7 +630,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   }
 
   private onchangedFrName(frName: any): void {
-    if (frName.match("^([A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ ]*)+$") == null || frName.length < 5 || frName.length > 125) {
+    if (frName.match("^([A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ'()&,/#’ ]*)+$") == null || frName.length < 5 || frName.length > 125) {
       this.setState({ error: strings.ErrMustLetter });
       this.setState({ isSiteFrNameRight: false });
     } else {
@@ -840,7 +840,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           "requesterEmail": "${this.props.context.pageContext.user.email}"
       }`
   };
-  this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
+    this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
       client.post(this.emailQueueUrl, AadHttpClient.configurations.v1, postQueue).then((response: HttpClientResponse) => {
           console.log(`Status code:`, response.status);
           console.log('respond is ', response.ok);
@@ -858,7 +858,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
       }`
         };
 
-        this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
+    this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
             client.post(this.emailQueueUrl, AadHttpClient.configurations.v1, postHD).then((response: HttpClientResponse) => {
                 console.log(`Status code:`, response.status);
                 console.log('respond is ', response.ok);
