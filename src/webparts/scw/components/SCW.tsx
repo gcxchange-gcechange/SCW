@@ -524,8 +524,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                     <h1>{strings.congrats}</h1>
                     <p>{strings.congratPara1}</p>
                     <p aria-live="polite">{strings.congratPara2}</p>
-                    <button autoFocus onClick={() => this.ResetScreen()}>{strings.congratHome}</button>
-                    <p>{strings.congratPara3} <a href="https://gcxgce.sharepoint.com/"> {strings.congratLink}</a></p>
+                    <DefaultButton className={styles.homeButton} autoFocus href="https://gcxgce.sharepoint.com/">{strings.congratHome}</DefaultButton>
+                    <p>{strings.congratPara3} <a href="https://gcxgce.sharepoint.com/sites/Support"> {strings.congratLink}</a></p>
                   </div>
                 :
                   <div className={styles.welcomeContainer}>
