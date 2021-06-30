@@ -294,7 +294,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           <p>{strings.paragrapheTellUs}</p>
           <em>{strings.validationTxtTellUs}</em>
           <section className={styles.SectiontextField}>
-            <Label htmlFor="englishLabelDesc" className={styles.labelBulingue} required>{strings.english}</Label>
+            <Label htmlFor="englishLabelDesc" className={styles.labelBulingue} required>{strings.spaceDescEn}</Label>
+            <span id="englishLabelDescriber" style={{color: "#777777", textAlign: 'left', display: 'block'}}>{strings.DescriptionHelperText}</span>
             <TextField
               title={strings.tooltipdescEn}
               autoFocus 
@@ -302,22 +303,30 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               value={this.state.tellusEn}
               placeholder={strings.phLetus}
               id="englishLabelDesc"
+              aria-labelledby="englishLabelDescriber"
+              errorMessage={(this.state.tellusEn.length >= 5 && this.state.tellusEn.length <= 500 ) ? '': (this.state.tellusEn.length > 1) && strings.DescriptionHelperText}
               onChanged={(v) => this.setState({ tellusEn: v })}></TextField>
-            <Label htmlFor="frenchLabelDesc" className={styles.labelBulingue} required>{strings.french}</Label>
+            <Label htmlFor="frenchLabelDesc" className={styles.labelBulingue} required>{strings.spaceDescFr}</Label>
+            <span id="frenchLabelDescriber" style={{color: "#777777", textAlign: 'left', display: 'block'}}>{strings.DescriptionHelperText}</span>
             <TextField
               title={strings.tooltipdescFr}
               multiline rows={4}
               value={this.state.tellusFr}
               id="frenchLabelDesc"
+              aria-labelledby="frenchLabelDescriber"
               placeholder={strings.phLetus}
+              errorMessage={(this.state.tellusFr.length >= 5 && this.state.tellusFr.length <= 500 ) ? '': (this.state.tellusFr.length > 1) && strings.DescriptionHelperText}
               onChanged={(v) => this.setState({ tellusFr: v })}></TextField>
             <Label htmlFor="businessLabel" className={styles.labelBulingue} required>{strings.businessReason}</Label>
+            <span id="businessLabelDescriber" style={{color: "#777777", textAlign: 'left', display: 'block'}}>{strings.DescriptionHelperText}</span>
             <TextField
               title={strings.tooltipBusReason}
               multiline rows={4}
               id="businessLabel"
+              aria-labelledby="businessLabelDescriber"
               value={this.state.BusinessReason}
               placeholder={strings.phBusinessReason}
+              errorMessage={(this.state.BusinessReason.length >= 5 && this.state.BusinessReason.length <= 500 ) ? '': (this.state.BusinessReason.length > 1) && strings.DescriptionHelperText}
               onChanged={(v) => this.setState({ BusinessReason: v })}></TextField>
           </section> 
         </div>
@@ -515,8 +524,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                     <h1>{strings.congrats}</h1>
                     <p>{strings.congratPara1}</p>
                     <p aria-live="polite">{strings.congratPara2}</p>
-                    <button autoFocus onClick={() => this.ResetScreen()}>{strings.congratHome}</button>
-                    <p>{strings.congratPara3} <a href="https://tbssctdev.sharepoint.com/"> {strings.congratLink}</a></p>
+                    <DefaultButton className={styles.homeButton} autoFocus href="https://gcxgce.sharepoint.com/">{strings.congratHome}</DefaultButton>
+                    <p>{strings.congratPara3} <a href="https://gcxgce.sharepoint.com/sites/Support"> {strings.congratLink}</a></p>
                   </div>
                 :
                   <div className={styles.welcomeContainer}>

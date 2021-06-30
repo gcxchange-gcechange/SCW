@@ -74,7 +74,8 @@ declare interface ISCWWebPartStrings {
   NextBtn: string;
   BackBtn: string;
   CancelBtn:string;
-  ErrMustLetter: strings;
+  ErrMustLetter: string;
+  DescriptionHelperText: string;
 }
 
 declare module 'SCWWebPartStrings' {
