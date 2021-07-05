@@ -3,7 +3,8 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
@@ -16,6 +17,7 @@ import O365Service from '../../services/O365Service';
 
 export interface ISCWWebPartProps {
   listTemplate: string;
+  prefLang: string;
 }
 
 export default class SCWWebPart extends BaseClientSideWebPart<ISCWWebPartProps> {
@@ -26,22 +28,23 @@ export default class SCWWebPart extends BaseClientSideWebPart<ISCWWebPartProps> 
       {
         listTemplate: this.properties.listTemplate,
         context: this.context,
+        prefLang: this.properties.prefLang,
       }
     );
     ReactDom.render(element, this.domElement);
   }
 
-  public onInit(): Promise<void> {  
-    return super.onInit().then( _ => {    
-      sp.setup({  
-        spfxContext: this.context  
-      });  
+  public onInit(): Promise<void> {
+    return super.onInit().then( _ => {
+      sp.setup({
+        spfxContext: this.context
+      });
 
       O365Service.setup(this.context);
       graph.setup(this.context);
       const r =  async () => {(await graph.groups()).length};
-    });  
-  }   
+    });
+  }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
@@ -64,7 +67,14 @@ export default class SCWWebPart extends BaseClientSideWebPart<ISCWWebPartProps> 
               groupFields: [
                 PropertyPaneTextField('listTemplate', {
                   label: strings.ListTemplateFieldLabel
-                })
+                }),
+                PropertyPaneDropdown('prefLang', {
+                  label: 'Preferred Language',
+                  options: [
+                    { key: 'account', text: 'Account' },
+                    { key: 'en-us', text: 'English' },
+                    { key: 'fr-fr', text: 'Français' }
+                  ]}),
               ]
             }
           ]
