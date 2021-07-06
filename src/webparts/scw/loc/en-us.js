@@ -38,8 +38,8 @@ define([], function() {
     "titleReview": "Review and submit!",
     "templateTitle": "Template title",
     "spaceName": "Community name",
-    "spaceDescEn":"Community description (EN)",
-    "spaceDescFr": "Community description (FR)",
+    "spaceDescEn": "English Community Description",
+    "spaceDescFr": "French Community Description",
     "teamPurpose": "Community Purpose and content",
     "btnSubmit": "Let's do this!",
     "btnChecksite": "Check availability",
@@ -76,5 +76,6 @@ define([], function() {
     "BackBtn": "Previous",
     "CancelBtn": "Cancel",
     "ErrMustLetter": "Must be a minimum of 5 characters and contain letters and numbers only",
+    "DescriptionHelperText": "Must be a minimum of 5 characters and a maximum of 500 characters long",
   }
 });

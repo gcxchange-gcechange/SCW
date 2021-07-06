@@ -38,8 +38,8 @@ define([], function() {
     "titleReview": "Passez en revue et soumettez!",
     "templateTitle": "Titre du modèle",
     "spaceName": "Nom de la communauté",
-    "spaceDescEn":"Description de la communauté",
-    "spaceDescFr": "Description de la communauté",
+    "spaceDescEn":"Description de la communauté en anglais",
+    "spaceDescFr": "Description de la communauté en français",
     "teamPurpose": "Objectif et contenu de la communauté",
     "btnSubmit": "Allons de l'avant!",
     "btnChecksite": "Vérifier la disponibilité",
@@ -75,7 +75,7 @@ define([], function() {
     "NextBtn": "Suivant",
     "BackBtn": "Revenez en arrière",
     "CancelBtn": "Annulez",
-    "ErrMustLetter": "Doit contenir uniquement des lettres et des chiffres. Chaque nom doit comporter pas moins de 5 caractères et pas plus de 125 caractères"
-
+    "ErrMustLetter": "Doit contenir uniquement des lettres et des chiffres. Chaque nom doit comporter pas moins de 5 caractères et pas plus de 125 caractères",
+    "DescriptionHelperText": "Chaque nom doit comporter pas moins de 5 caractères et pas plus de 500 caractères",
   }
 });
