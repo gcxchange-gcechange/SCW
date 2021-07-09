@@ -343,28 +343,26 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           <p>{this.strings.validationTxtOwners}</p>
 
           <div className="form-group">
-            <Label htmlFor="peopleLabel" className={styles.labelBulingue} required>{this.strings.owners}</Label>
+            
             <PeoplePicker
               context={this.props.context}
-              personSelectionLimit={1}
-              groupName={""}
-              showHiddenInUI={false}
-              defaultSelectedUsers = {[this.props.context.pageContext.user.email]}
-              required = {true}
-              ensureUser={false}
+              peoplePickerCntrlclassName={styles.peoplePickerHidden}       
               disabled={true}/>
-
+            <Label htmlFor="peopleLabel" className={styles.labelBulingue} required>{this.strings.owners}</Label>  
             <PeoplePicker
             placeholder={this.strings.owners}
             showtooltip={true}
               tooltipMessage={this.strings.tooltipOwners}
               context={this.props.context}
-              personSelectionLimit={2}
+              personSelectionLimit={3}
+              peoplePickerCntrlclassName={styles.peoplePickerTest}
               groupName={""}
               showHiddenInUI={false}
-              required = {true}
-              onChange = {this._getOwners}
+              defaultSelectedUsers = {[this.props.context.pageContext.user.email]}
+              required = {true} 
+              onChange = {this._getOwners}                      
               ensureUser={false}/>
+              
           </div>
           <p>{this.strings.ownerInfo1}</p>
           <p>{this.strings.ownerInfo2}</p>
@@ -619,8 +617,12 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   private _getOwners(ownersFromPeoplePicker: any[]) {
     owners = [this.props.context.pageContext.user.email];
     for (let item in ownersFromPeoplePicker) {
-      owners.push(ownersFromPeoplePicker[item].secondaryText);
-      console.log("owner is", owners);
+      if (this.props.context.pageContext.user.email === ownersFromPeoplePicker[item].secondaryText) {
+        console.log(ownersFromPeoplePicker);
+      } else {
+        owners.push(ownersFromPeoplePicker[item].secondaryText);
+        console.log("owner is", owners); 
+      }
     }
     this.setState({ ownersNumber: owners.length });
   }

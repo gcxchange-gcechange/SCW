@@ -177,6 +177,14 @@
   }
 }
 
+.peoplePickerHidden {
+  display: none !important;
+}
+.peoplePickerTest{
+  span > div:nth-child(1) > button {
+    display: none !important;
+  }
+}
 
 .pagination button:focus{
   border: 3px black solid
