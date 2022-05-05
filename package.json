@@ -26,7 +26,7 @@
     "@pnp/sp": "^2.0.12",
     "@pnp/spfx-controls-react": "2.1.0",
     "@uifabric/icons": "^7.5.17",
-    "axios": "^0.21.0",
+    "axios": "^0.21.2",
     "lts": "^1.2.0",
     "office-ui-fabric-react": "^6.214.0",
     "office-ui-fabric-react-pagination": "0.0.8",
