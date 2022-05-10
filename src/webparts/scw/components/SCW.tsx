@@ -3,7 +3,7 @@ import styles from './SCW.module.scss';
 import { ISCWProps } from './ISCWProps';
 import { ISCWState } from './ISCWState';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { MessageBarType, Stack, Label, Spinner, Image, DefaultButton, ImageFit, IImageProps } from 'office-ui-fabric-react';
+import { MessageBarType, Stack, Label, Spinner, Image, DefaultButton, ImageFit, IImageProps, ActionButton } from 'office-ui-fabric-react';
 import { Selection} from 'office-ui-fabric-react/lib/DetailsList';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
@@ -136,7 +136,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   private _onValidateStep(step: MyWizardSteps): IWizardStepValidationResult | Promise<IWizardStepValidationResult> {
 
     let isValid = true;
-    let  isValid1 = true;
+    let isValid1 = true;
     let isValid2 = true;
     let ValidResult = true;
 
@@ -199,6 +199,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
       disableStep4={(this.state.tellusEn.length >= 5 && this.state.tellusEn.length < 500 && this.state.tellusFr.length >= 5 && this.state.tellusFr.length < 500 && this.state.BusinessReason.length >= 5 && this.state.BusinessReason.length < 500 ? false : true)}
       disableStep8={(this.state.ownersNumber >= 2 ? false : true)}
       finishButtonLabel= {this.strings.btnSubmit}
+      nextButtonLabel={this.strings.NextBtn}
+      previousButtonLabel={this.strings.BackBtn}
     >
     <WizardStep caption={this.strings.menuTemplate} step={MyWizardSteps.FirstStep}>
       <div className={styles.wizardStep}>
@@ -305,7 +307,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               autoFocus
               multiline rows={4}
               value={this.state.tellusEn}
-              placeholder={this.strings.phLetus}
+              placeholder={this.strings.phLetusEn}
               id="englishLabelDesc"
               aria-labelledby="englishLabelDescriber"
               errorMessage={(this.state.tellusEn.length >= 5 && this.state.tellusEn.length <= 500 ) ? '': (this.state.tellusEn.length > 1) && this.strings.DescriptionHelperText}
@@ -318,7 +320,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               value={this.state.tellusFr}
               id="frenchLabelDesc"
               aria-labelledby="frenchLabelDescriber"
-              placeholder={this.strings.phLetus}
+              placeholder={this.strings.phLetusFr}
               errorMessage={(this.state.tellusFr.length >= 5 && this.state.tellusFr.length <= 500 ) ? '': (this.state.tellusFr.length > 1) && this.strings.DescriptionHelperText}
               onChanged={(v) => this.setState({ tellusFr: v })}></TextField>
             <Label htmlFor="businessLabel" className={styles.labelBulingue} required>{this.strings.businessReason}</Label>
@@ -374,6 +376,8 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
       <WizardStep caption={this.strings.menuFinal} step={MyWizardSteps.LastStep}>
         <div className={styles.wizardStep}>
         <h1 className={styles.titleStep}>{this.strings.titleReview}</h1>
+        <p>{this.strings.lastStepMakeChanges}</p>
+        
           {(this.state.loading ?
             <div>
               <Label>{this.strings.textLoading}</Label>
@@ -389,6 +393,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   title={this.strings.templateTitle}
                   id="templateLabel"
                   readOnly
+                  disabled
                   value={(this.state.selected[0] !== undefined ? this.state.selected[0]["title"]: "")}
                   placeholder="template"></TextField>
                   </div>
@@ -398,6 +403,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   title={this.strings.spaceName}
                   id="spaceNameLabel"
                   readOnly
+                  disabled
                   value={`'${this.state.title} - ${this.state.frName}'`}
                   placeholder="Space Name"></TextField>
                 </div>
@@ -410,6 +416,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   title={this.strings.spaceDescEn}
                   id="spaceEnLabel"
                   readOnly
+                  disabled
                   defaultValue={this.state.tellusEn}
                   placeholder="Descripton en"></TextField>
                 </div>
@@ -419,6 +426,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   title={this.strings.spaceDescFr}
                   id="spaceFrLabel"
                   readOnly
+                  disabled
                   defaultValue={this.state.tellusFr}
                   placeholder="Description fr"></TextField>
                   </div>
@@ -433,19 +441,21 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                   multiline
                   autoAdjustHeight
                   readOnly
+                  disabled
                   value={listOwners}
                   placeholder="Owners"></TextField>
                 </div>
                 <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6">
                 <Label htmlFor="teamPurposeLabel" className={styles.labelBulingue} required>{this.strings.teamPurpose}</Label>
                 <TextField
-                title={this.strings.teamPurpose}
-                id="teamPurposeLabel"
-                multiline
-                autoAdjustHeight
-                readOnly
-                value={this.state.BusinessReason}
-                placeholder="Business Reason"></TextField>
+                  title={this.strings.teamPurpose}
+                  id="teamPurposeLabel"
+                  multiline
+                  autoAdjustHeight
+                  readOnly
+                  disabled
+                  value={this.state.BusinessReason}
+                  placeholder="Business Reason"></TextField>
                 </div>
               </div>
             </div>
@@ -540,7 +550,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                     <h1 className={ styles.titleStep }>{this.strings.createSpace}</h1>
                     <p>{this.strings.paragrapheHome}</p>
                     {this.state.templateItems.length !=0 ?
-                      <DefaultButton title={this.strings.startButton} className={styles.GoButton} text={this.strings.startButton} onClick={() => this._openWizard()} />
+                      <ActionButton title={this.strings.startButton} className={styles.GoButton} text={this.strings.startButton} onClick={() => this._openWizard()} />
                      :
                       <div>
                         <Spinner label={this.strings.iconLoading} ariaLabel={this.strings.iconLoading} ariaLive="assertive" />
