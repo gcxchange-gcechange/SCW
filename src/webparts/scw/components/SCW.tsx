@@ -238,34 +238,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               </span>
             ))}
           </div>
-        {/* <Stack horizontal verticalAlign="center" horizontalAlign="center">
-          <br /><br />
-          <div className={styles.pagination}>
-          <Pagination
-              style={{margin : "100px", border: "solid blue 3px"}}
-              currentPage={this.state.currentPage}
-              totalPages={totalPages}
-              siblingCount={0}
-              className={styles.pagination}
-              onChange={(page: number) => {
-                if (this._selection.count != 0 ){
-                  currentSelectedKey = (this._selection.getSelection()[0] as ITemplate).key;
-                  console.log('current key is ', currentSelectedKey);
-                }
-                if (currentSelectedKey >= (page - 1) * 4 && currentSelectedKey <= page*4 ){
-                  const newSelection1 = this._selection;
-                  newSelection1.setItems(allTemplateItems);
-                  newSelection1.setKeySelected(`${currentSelectedKey}`, true, false);
-                }
-                this.setState({
-                  currentPage: page,
-                  templateItems: allTemplateItems.slice((page - 1) * 4, page * 4),
-                  selectionDetails: this._getSelectionDetails(),
-                });
-              }}
-            />
-          </div>
-        </Stack> */}
       </div>
     </WizardStep>
 
@@ -566,7 +538,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
   private async loadTemplate(){
     var allTemplateItems = [];
 
-    await  this.props.context.spHttpClient.get("https://devgcx.sharepoint.com/teams/Scw_admin/_api/web/lists/GetByTitle('Space Templates')/Items", SPHttpClient.configurations.v1,
+    await  this.props.context.spHttpClient.get("", SPHttpClient.configurations.v1,
       {
         headers: {
           "Accept": "application/json;odata=nometadata",
@@ -578,7 +550,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           if (response.ok) {
             var collection = responseFormatted.value;
             for (var i = 0; i < collection.length; i++) {
-              console.log("test1")
 
               let dummyElementUrl = document.createElement("DIV");
               dummyElementUrl.innerHTML = collection[i].Template_x0020_Image_x0020_URL;
@@ -602,7 +573,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
                 };
                 allTemplateItems.push(template);
             }
-
           }
         
         totalPages = Math.ceil(allTemplateItems.length / 4);
@@ -620,76 +590,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           console.log("err is ", errMsg);
         });
       })
-// console.log(this.props.context.pageContext.web.absoluteUrl)
-//    await this.props.context.spHttpClient.get("https://devgcx.sharepoint.com/teams/Scw_admin/_api/web/lists/GetByTitle('Space Templates')/Items", SPHttpClient.configurations.v1)
-//     .then((response: SPHttpClientResponse) => {
-//       response.json().then((responseJSON) => {
-//             var i = 0;
-//             console.log(responseJSON.value)
-//             for (var k in responseJSON.value) {
-//                 console.log(k[0])
-//               var template: ITemplate = {
-//                 key: i,
-//                 title: responseJSON[k].TitleEn,
-//                 titleFR: responseJSON[k].TitleFr,
-//                 description: responseJSON[k].DescriptionEn,
-//                 descriptionFR: responseJSON[k].DescriptionFr,
-//                 url: responseJSON[k].TemplateImgUrl
-//               };
-//               allTemplateItems.push(template);
-//               i++;
-//           }
-//           totalPages = Math.ceil(allTemplateItems.length / 4);
-//           if (response.ok) {
-//             console.log("response OK");
-//             this.setState({
-//               templateItems: allTemplateItems,
-//             });
-//           } else {
-//           console.log("Response error");
-//           }
-//         })
-//         .catch((response: any) => {
-//           let errMsg: string = `WARNING - error when calling URL ${this.functionUrl}. Error = ${response.message}${response.status}${JSON.stringify(response)}`;
-//           console.log("err is ", errMsg);
-//         });
-//     });
-
-    // await this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
-    //   client.get(this.functionTemplateImg, AadHttpClient.configurations.v1).then((response: HttpClientResponse) => {
-    //     console.log(`Status code: ${response.status}`);
-    //     response.json().then((responseJSON: JSON) => {
-    //     var i = 0;
-    //     for (var k in responseJSON) {
-
-    //       var template: ITemplate = {
-    //         key: i,
-    //         title: responseJSON[k].TitleEn,
-    //         titleFR: responseJSON[k].TitleFr,
-    //         description: responseJSON[k].DescriptionEn,
-    //         descriptionFR: responseJSON[k].DescriptionFr,
-    //         url: responseJSON[k].TemplateImgUrl
-    //       };
-    //       allTemplateItems.push(template);
-    //       i++;
-    //   }
-    //   totalPages = Math.ceil(allTemplateItems.length / 4);
-    //       if (response.ok) {
-    //         console.log("response OK");
-    //         this.setState({
-    //           templateItems: allTemplateItems,
-    //         });
-    //       } else {
-    //       console.log("Response error");
-    //       }
-    //     })
-    //     .catch((response: any) => {
-    //       let errMsg: string = `WARNING - error when calling URL ${this.functionUrl}. Error = ${response.message}${response.status}${JSON.stringify(response)}`;
-    //       console.log("err is ", errMsg);
-    //     });
-    //   });
-
-    // });
   }
 
 
