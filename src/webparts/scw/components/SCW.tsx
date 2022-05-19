@@ -18,7 +18,10 @@ import { BaseWizard, WizardStep, IWizardStepValidationResult } from "../../../co
 import { ISelected } from './ISelected';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { spaceDescFr } from 'SCWWebPartStrings';
-
+import {
+  SPHttpClient,
+  SPHttpClientResponse
+} from '@microsoft/sp-http';
 import { SelectLanguage } from './SelectLanguage';
 
 var owners = [];
@@ -235,34 +238,6 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               </span>
             ))}
           </div>
-        {/* <Stack horizontal verticalAlign="center" horizontalAlign="center">
-          <br /><br />
-          <div className={styles.pagination}>
-          <Pagination
-              style={{margin : "100px", border: "solid blue 3px"}}
-              currentPage={this.state.currentPage}
-              totalPages={totalPages}
-              siblingCount={0}
-              className={styles.pagination}
-              onChange={(page: number) => {
-                if (this._selection.count != 0 ){
-                  currentSelectedKey = (this._selection.getSelection()[0] as ITemplate).key;
-                  console.log('current key is ', currentSelectedKey);
-                }
-                if (currentSelectedKey >= (page - 1) * 4 && currentSelectedKey <= page*4 ){
-                  const newSelection1 = this._selection;
-                  newSelection1.setItems(allTemplateItems);
-                  newSelection1.setKeySelected(`${currentSelectedKey}`, true, false);
-                }
-                this.setState({
-                  currentPage: page,
-                  templateItems: allTemplateItems.slice((page - 1) * 4, page * 4),
-                  selectionDetails: this._getSelectionDetails(),
-                });
-              }}
-            />
-          </div>
-        </Stack> */}
       </div>
     </WizardStep>
 
@@ -562,25 +537,45 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
 
   private async loadTemplate(){
     var allTemplateItems = [];
-    await this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
-      client.get(this.functionTemplateImg, AadHttpClient.configurations.v1).then((response: HttpClientResponse) => {
-        console.log(`Status code: ${response.status}`);
-        response.json().then((responseJSON: JSON) => {
-        var i = 0;
-        for (var k in responseJSON) {
 
-          var template: ITemplate = {
-            key: i,
-            title: responseJSON[k].TitleEn,
-            titleFR: responseJSON[k].TitleFr,
-            description: responseJSON[k].DescriptionEn,
-            descriptionFR: responseJSON[k].DescriptionFr,
-            url: responseJSON[k].TemplateImgUrl
-          };
-          allTemplateItems.push(template);
-          i++;
-      }
-      totalPages = Math.ceil(allTemplateItems.length / 4);
+    await  this.props.context.spHttpClient.get("", SPHttpClient.configurations.v1,
+      {
+        headers: {
+          "Accept": "application/json;odata=nometadata",
+          "odata-version": "3.0"
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        return response.json().then((responseFormatted) => {
+          if (response.ok) {
+            var collection = responseFormatted.value;
+            for (var i = 0; i < collection.length; i++) {
+
+              let dummyElementUrl = document.createElement("DIV");
+              dummyElementUrl.innerHTML = collection[i].Template_x0020_Image_x0020_URL;
+              let url = dummyElementUrl.innerText;
+
+              let dummyElementDescEn = document.createElement("DIV");
+              dummyElementDescEn.innerHTML = collection[i].Template_x0020_Description_x0020;
+              let description = dummyElementDescEn.innerText;
+
+              let dummyElementDescFr = document.createElement("DIV");
+              dummyElementDescFr.innerHTML = collection[i].Template_x0020_Description_x00200;
+              let descriptionFR = dummyElementDescFr.innerText;
+
+              var template: ITemplate = {
+                  key: i,
+                  title: collection[i].Template_x0020_Name_x0020__x0028,
+                  titleFR: collection[i].Template_x0020_Name_x0020__x00280,
+                  description: description,
+                  descriptionFR: descriptionFR,
+                  url: url
+                };
+                allTemplateItems.push(template);
+            }
+          }
+        
+        totalPages = Math.ceil(allTemplateItems.length / 4);
           if (response.ok) {
             console.log("response OK");
             this.setState({
@@ -591,12 +586,10 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           }
         })
         .catch((response: any) => {
-          let errMsg: string = `WARNING - error when calling URL ${this.functionUrl}. Error = ${response.message}${response.status}${JSON.stringify(response)}`;
+          let errMsg: string = `WARNING - error when calling URL template link. Error = ${response.message}${response.status}${JSON.stringify(response)}`;
           console.log("err is ", errMsg);
         });
-      });
-
-    });
+      })
   }
 
 
