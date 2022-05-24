@@ -528,16 +528,16 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
               : this.state.showMessageBar
                 ?
                   <div className={styles.congratScreen}>
-                     <Image
-                       {...imageCongrat}
-                      alt={this.strings.altCongrat}
-                      className={styles.imageFit}
-                    />
                     <h1>{this.strings.congrats}</h1>
                     <p>{this.strings.congratPara1}</p>
                     <p aria-live="polite">{this.strings.congratPara2}</p>
-                    <DefaultButton className={styles.homeButton} autoFocus href="https://gcxgce.sharepoint.com/">{this.strings.congratHome}</DefaultButton>
                     <p>{this.strings.congratPara3} <a href="https://gcxgce.sharepoint.com/sites/Support"> {this.strings.congratLink}</a></p>
+                    <Image
+                      {...imageCongrat}
+                      alt={this.strings.altCongrat}
+                      className={styles.imageFit}
+                    />
+                    <DefaultButton className={styles.homeButton} autoFocus href="https://gcxgce.sharepoint.com/">{this.strings.congratHome}</DefaultButton>
                   </div>
                 :
                   <div className={styles.welcomeContainer}>
