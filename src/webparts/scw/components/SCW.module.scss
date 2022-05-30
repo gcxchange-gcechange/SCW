@@ -154,26 +154,30 @@
 }
 
 .congratScreen{
-  background-color: #0A5BFC;
   text-align: center;
-  color: white;
   padding: 20px;
-  img{
-    margin-top:5%;
+  h1 {
+    color: #0a5bfc;
+  }
+  img {
+    object-fit: cover;
+    height: 250px;
   }
   a {
     color: inherit;
   }
   .homeButton{
-    color:inherit;
+    color: white;
     font-size: x-large;
-    border: 3px solid white;
+    border: 3px solid #0a5bfc;
     border-radius: 20px;
-    background-color: inherit;
+    background-color: #0a5bfc;
     padding: 0px 5%;
+    float: right;
   }
-  button:hover{
-    background-color: #27437d;
+  .homeButton:hover, button:hover{
+    background-color: #27437d !important; 
+    border-color: #27437d !important;
   }
 }
 
