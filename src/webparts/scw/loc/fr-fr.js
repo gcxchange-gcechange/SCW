@@ -56,10 +56,10 @@ define([], function() {
     "textLoading": "Vos données sont entrain d'être envoyé, merci de votre patience ",
     "altWelcome": "SharePoint et Microsoft Teams échangent de l’information",
     "altCongrat": "",
-    "ownerInfo1": "Si vous ne trouvez pas le nom de la personne que vous cherchez,",
-    "ownerInfo2": " elle n'est probablement pas encore enregistrée à GCÉchange.",
-    "ownerInfo3": "Demandez-leur de s'enregister …  ",
-    "ownerInfo4": "Puis recommencez le processus d'inscription de collectivité. ",
+    "ownerInfo1": "Vous ne pouvez pas trouver une personne lorsque vous recherchez leur nom?",
+    "ownerInfo2": "Il est probable qu’elle ne s’est toujours pas inscrite à GCÉchange.",
+    "ownerInfo3": "Veuillez leur demander de s’inscrire. Une fois inscrit(e), vous pourrez les ajouter à votre collectivité. ",
+    "ownerInfo4": "S’inscrire à GCÉchange ",
     "tooltipWelImg": "SharePoint et Microsoft Teams échangent de l’information",
     "tooltipWelBtn": "C'est parti!",
     "tooltipspaceNameEn": "Saisissez le nom de la collectivité en anglais",
@@ -78,6 +78,7 @@ define([], function() {
     "CancelBtn": "Annulez",
     "ErrMustLetter": "Doit contenir uniquement des lettres, des chiffres et certains caractères spéciaux (()&,/#). Chaque nom doit comporter pas moins de 5 caractères et pas plus de 125 caractères",
     "DescriptionHelperText": "Chaque nom doit comporter pas moins de 5 caractères et pas plus de 500 caractères",
-    "lastStepMakeChanges": "Si vous devez apporter des modifications, cliquez sur le bouton précédent ci-dessous pour modifier les pages précédentes de votre soumission."
+    "lastStepMakeChanges": "Si vous devez apporter des modifications, cliquez sur le bouton précédent ci-dessous pour modifier les pages précédentes de votre soumission.",
+    "ownernewwindow": "Le lien s’ouvre dans un nouvel onglet"
   }
 });

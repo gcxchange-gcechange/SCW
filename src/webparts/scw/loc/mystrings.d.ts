@@ -76,6 +76,7 @@ declare interface ISCWWebPartStrings {
   CancelBtn:string;
   ErrMustLetter: string;
   DescriptionHelperText: string;
+  ownernewwindow: string;
 }
 
 declare module 'SCWWebPartStrings' {

@@ -23,6 +23,7 @@ import {
   SPHttpClientResponse
 } from '@microsoft/sp-http';
 import { SelectLanguage } from './SelectLanguage';
+import { Icon } from 'office-ui-fabric-react';
 
 var owners = [];
 let totalPages: number = 1;
@@ -344,7 +345,7 @@ export default class SCW extends React.Component<ISCWProps, ISCWState> {
           <p>{this.strings.ownerInfo1}</p>
           <p>{this.strings.ownerInfo2}</p>
           <p>{this.strings.ownerInfo3}</p>
-          <p>{this.strings.ownerInfo4}</p>
+          <p><a href="https://www.gcx-gce.gc.ca/" target="_blank" rel="noreferrer noopener">{this.strings.ownerInfo4}<Icon iconName="OpenInNewTab" /><span className={styles.screenreadertext}> {this.strings.ownernewwindow}</span></a></p>
         </div>
       </WizardStep>
 

@@ -56,10 +56,10 @@ define([], function() {
     "textLoading": "Your infomation is sending, thanks for your patience",
     "altWelcome": "SharePoint and Microsoft Teams sharing information",
     "altCongrat": "",
-    "ownerInfo1": "Can’t find a person when you search for their name?  ",
-    "ownerInfo2": "It’s likely they haven't registered yet for GCXchange. ",
-    "ownerInfo3": "Please ask them to register first by … ",
-    "ownerInfo4": "Then come on back to request your community. ",
+    "ownerInfo1": "Can’t find a person when you search for their name?",
+    "ownerInfo2": "It’s likely they haven't registered yet for GCXchange.",
+    "ownerInfo3": "Please ask them to register. Once they are registered, you will be able to add them to your community.",
+    "ownerInfo4": "Register to GCXchange ",
     "tooltipWelImg": "SharePoint and Microsoft Teams sharing information",
     "tooltipWelBtn": "Let's go!",
     "tooltipspaceNameEn": "Type the English community name",
@@ -78,6 +78,7 @@ define([], function() {
     "CancelBtn": "Cancel",
     "ErrMustLetter": "Must be a minimum of 5 characters and contain letters, numbers and certain special characters (()&,/#)",
     "DescriptionHelperText": "Must be a minimum of 5 characters and a maximum of 500 characters long",
-    "lastStepMakeChanges": "If you need to make changes, click the previous button below to edit the previous pages in your submission."
+    "lastStepMakeChanges": "If you need to make changes, click the previous button below to edit the previous pages in your submission.",
+    "ownernewwindow":"Link opens in a new tab"
   }
 });
